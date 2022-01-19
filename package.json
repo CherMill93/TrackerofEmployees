@@ -1,0 +1,20 @@
+{
+  "name": "trackerofemployees",
+  "version": "1.0.0",
+  "description": "Challenge 12 - Employee Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CherMill93/TrackerofEmployees.git"
+  },
+  "author": "CherMill93",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CherMill93/TrackerofEmployees/issues"
+  },
+  "homepage": "https://github.com/CherMill93/TrackerofEmployees#readme"
+}
