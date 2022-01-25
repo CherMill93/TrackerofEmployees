@@ -1,6 +1,7 @@
 const db = require('./db/connection');
 const sql = require('mysql2');
 const inquirer = require('inquirer');
+require('console.table');
 
 // const promptDepartment = () => {
 //   return inquirer.prompt([
@@ -118,16 +119,19 @@ const updateRole = async () => {
   const getRole = await db
   .promise()
   .query(`SELECT job_name as name, id as value FROM job`);
+    console.log(getEmployee)
+    console.log(getRole)
+
   const userData = await inquirer.prompt([
     {
       type: "list",
-      name: "id",
+      name: "employeeId",
       message: "Please select as employee whose role you would like to change.",
       choices: getEmployee[0],
     },
     {
       type: "list",
-      name: "id",
+      name: "roleId",
       message: "Please select the role of the employee.",
       choices: getRole[0],
     },
@@ -138,8 +142,26 @@ const updateRole = async () => {
     userData.role_id,
     userData.id,
   ]); 
+  console.table(assignRole[0])
+  promptUser();
+}
 
-//can't pull employee data - WHAT DO???
+const viewDepartments = async () => {
+  const departmentRecords = await db.promise().query('SELECT * FROM DEPARTMENT')
+  console.table(departmentRecords[0])
+  promptUser()
+}
+
+const viewRole = async () => {
+  const jobRecords = await db.promise().query('SELECT * FROM JOB')
+  console.table(jobRecords[0])
+  promptUser()
+}
+
+const viewEmployee = async () => {
+  const employeeRecords = await db.promise().query('SELECT * FROM EMPLOYEE')
+  console.table(employeeRecords[0])
+  promptUser()
 }
 
   // inquirer prompts
@@ -165,32 +187,16 @@ const promptUser = () => {
     if (routine === 'view all departments') 
     { //queries here
       console.log('Wahoo you can view all departments!')
-      // app.get('/api/department', (req, res) => {
-      //     const sql = `SELECT candidates.*, parties.name 
-      //                   AS party_name 
-      //                   FROM candidates 
-      //                   LEFT JOIN parties 
-      //                   ON candidates.party_id = parties.id`;
-                        
-      //     db.query(sql, (err, rows) => {
-      //       if (err) {
-      //         res.status(500).json({ error: err.message });
-      //         return;
-      //       }
-      //       res.json({
-      //         message: 'success',
-      //         data: rows
-      //       });
-      //     });
-        // });
-    
+      viewDepartments()
     }else if (routine === 'view all roles') 
     {
-      db.query(`SELECT * FROM department`)
       console.log('Wahoo you can view all roles!')
+      viewRole()
       
     }else if (routine === 'view all employees') 
-    {console.log('Wahoo view all employees!')} //queries here
+    {console.log('Wahoo view all employees!')
+    viewEmployee();
+  } 
 
     else if (routine === 'add a department') 
       { 
