@@ -157,6 +157,7 @@ const promptUser = () => {
         "add a role",
         "add an employee", 
         "update an employee role",
+        "exit navigation"
       ],
     }
   ]).then( ({ routine }) => {
@@ -164,71 +165,70 @@ const promptUser = () => {
     if (routine === 'view all departments') 
     { //queries here
       console.log('Wahoo you can view all departments!')
-      app.get('/api/department', (req, res) => {
-          const sql = `SELECT candidates.*, parties.name 
-                        AS party_name 
-                        FROM candidates 
-                        LEFT JOIN parties 
-                        ON candidates.party_id = parties.id`;
+      // app.get('/api/department', (req, res) => {
+      //     const sql = `SELECT candidates.*, parties.name 
+      //                   AS party_name 
+      //                   FROM candidates 
+      //                   LEFT JOIN parties 
+      //                   ON candidates.party_id = parties.id`;
                         
-          db.query(sql, (err, rows) => {
-            if (err) {
-              res.status(500).json({ error: err.message });
-              return;
-            }
-            res.json({
-              message: 'success',
-              data: rows
-            });
-          });
-        });
+      //     db.query(sql, (err, rows) => {
+      //       if (err) {
+      //         res.status(500).json({ error: err.message });
+      //         return;
+      //       }
+      //       res.json({
+      //         message: 'success',
+      //         data: rows
+      //       });
+      //     });
+        // });
     
-    }; //db.query(`SELECT * FROM employee)
-
-    if (routine === 'view all roles') 
+    }else if (routine === 'view all roles') 
     {
       db.query(`SELECT * FROM department`)
       console.log('Wahoo you can view all roles!')
       
-    }; //queries here
+    }else if (routine === 'view all employees') 
+    {console.log('Wahoo view all employees!')} //queries here
 
-    if (routine === 'view all employees') 
-    {console.log('Wahoo view all employees!')}; //queries here
-
-    if (routine === 'add a department') 
+    else if (routine === 'add a department') 
       { 
         console.log('Wahoo add a department!')
         addDept()
-    }; 
+    }
 
-    if (routine === 'add a role') 
+    else if (routine === 'add a role') 
     {
       console.log('Wahoo add a role!')
       addRole();
-    }; //queries here
+    } 
     
-    if (routine === 'add an employee') 
+   else if (routine === 'add an employee') 
     {
       console.log('Wahoo add an employee!')
       addEmployee();
-    }; //queries here
+    }
 
-    if (routine === 'update an employee role') 
+    else if (routine === 'update an employee role') 
     {
       console.log('Wahoo update an employee role!')
       updateRole();
-    }; //queries here
+    }
+
+    else {
+      db.end()
+      process.exit(0)
+    }
     
   });
 };
 
-promptUser();
 
-// Start server after DB connection
+
+
 db.connect(err => {
   if (err) throw err;
   console.log('Database connected.');
-  // app.listen(PORT, () => {
-  //   console.log(`Server running on port ${PORT}`);
-  // });
+  promptUser();
 });
