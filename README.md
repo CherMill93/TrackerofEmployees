@@ -1,6 +1,6 @@
 # Employee Tracker
    # Installation
-   Follow this link to visit page: https://chermill93.github.io/InteractiveFrontEndProject/
+   Follow this link to visit page: https://github.com/CherMill93/TrackerofEmployees.git
 
    # Instructions
   1. Enusre Node is running on console.
@@ -16,8 +16,9 @@
   6. Enter all relevant information from prompt
   7. Exit prompt to exit
 
-  ## Live Demo
-    
+   # Live Demo
+  https://watch.screencastify.com/v/wZaRzZ9svt0AKchMgdcE
+
    # Credits
    Tutor Sangeetha KP, TA Karina, and various students in course
 
@@ -28,8 +29,4 @@
    # GitHub
    CherMill93
    [Developer's Profile](https://github.com/CherMill93)
-
-
-   # Email
-   For any questions, concerns, or feedback please reach out here <a href="mailto:cmille2016@gmail.com">cmille2016@gmail.com</a>
    
